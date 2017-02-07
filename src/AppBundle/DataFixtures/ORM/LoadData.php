@@ -25,7 +25,6 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 		$user1 = new User();
 		$user1->setEmail('admin@pp.pp');
 		$user1->setUsername('admin');
-		$user1->setIsActive(true);
 		$user1->addRole('ROLE_ADMIN');
 		$token = $this->generateUniqId();
 		$user1->setToken($token);
@@ -39,7 +38,6 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 		$user2 = new User();
 		$user2->setEmail('user@pp.pp');
 		$user2->setUsername('user');
-		$user2->setIsActive(true);
 		$user2->addRole('ROLE_USER');
 		$token = $this->generateUniqId();
 		$user2->setToken($token);

@@ -1,8 +1,7 @@
-bd_user:
-    resource: "@BDUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 app:
     resource: "@AppBundle/Controller/"
+    type:     annotation
+
+bd_user:
+    resource: "@BDUserBundle/Controller/"
     type:     annotation

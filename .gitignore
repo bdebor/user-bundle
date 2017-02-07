@@ -13,3 +13,4 @@
 
 /.idea/
 src/BD/UserBundle/Entity/*~
+/doc/doc

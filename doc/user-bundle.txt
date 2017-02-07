@@ -74,3 +74,9 @@ security:
             entity:
                 class: BDUserBundle:User
                 property: username
+
+---
+
+commit "security.yml, http_basic: ~" :
+
+J'ai repris http://symfony.com/doc/current/security/entity_provider.html, pour le code de User.php.
