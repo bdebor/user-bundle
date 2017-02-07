@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="app_users")
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="BD\UserBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
@@ -58,6 +58,7 @@ class User implements UserInterface, \Serializable
         $this->isActive = true;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid(null, true));
+        $this->createdAt = new \DateTime('now');
     }
 
     public function getUsername()

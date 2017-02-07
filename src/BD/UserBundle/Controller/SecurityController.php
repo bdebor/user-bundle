@@ -4,6 +4,8 @@
 
 namespace BD\UserBundle\Controller;
 
+use BD\UserBundle\Entity\User;
+use BD\UserBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,5 +35,37 @@ class SecurityController extends Controller {
     public function logoutAction()
     {
         // you'll need to create a route for this URL (but not a controller)
+    }
+
+    /**
+     * @Route("/signin", name="signin")
+     */
+    public function signinAction(Request $request)
+    {
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $encoder = $this->get('security.password_encoder');
+            $password = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            $user->addRole('ROLE_USER');
+            $token = $this->generateUniqId();
+            $user->setToken($token);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return $this->render('@BDUser/security/signin.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    private function generateUniqId() {
+        $result = bin2hex(openssl_random_pseudo_bytes(16));
+        return $result;
     }
 }
