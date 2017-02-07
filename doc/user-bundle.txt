@@ -1,0 +1,76 @@
+composer create-project symfony/framework-standard-edition everquity "2.8.*"
+
+database_name: user-bundle
+
+console doctrine:database:create
+
+console generate:bundle
+	Are you planning on sharing this bundle across multiple applications? [no]: y
+	Bundle namespace: BD/UserBundle
+	Bundle name [BDUserBundle]: BDUserBundle
+	annotation
+
+console doctrine:generate:entity
+	BDUserBundle:User
+	annotation
+
+copier-coller des propriétés :
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=60, unique=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
+     * @ORM\Column(name="token", type="string", length=32)
+     */
+    private $token;
+
+console doctrine:generate:entities BDUserBundle
+
+/**
+ * @ORM\Column(name="roles", type="string") // json_encode($array), length=255 is enough
+ */
+private $roles;
+
+composer require --dev doctrine/doctrine-fixtures-bundle
+$bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+
+src/AppBundle/DataFixtures/ORM/LoadData.php
+php app/console doctrine:fixtures:load
+
+---
+security:
+
+    encoders:
+        BD\UserBundle\Entity\User:
+            algorithm: bcrypt
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+#        in_memory:
+#            memory: ~
+
+        our_db_provider:
+            entity:
+                class: BDUserBundle:User
+                property: username
