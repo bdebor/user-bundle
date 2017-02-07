@@ -80,3 +80,10 @@ security:
 commit "security.yml, http_basic: ~" :
 
 J'ai repris http://symfony.com/doc/current/security/entity_provider.html, pour le code de User.php.
+
+---
+
+commit "login form" :
+
+http://symfony.com/doc/current/security/form_login_setup.html
+src/BD/UserBundle/Controller/SecurityController.php

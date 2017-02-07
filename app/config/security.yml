@@ -15,8 +15,13 @@ security:
         main:
 #            pattern:    ^/ # c'est la valeur par défaut, ca veut dire que le firewall est sur toutes les url
             anonymous: ~ # pas obligé d'etre authentifié pour les url qui n'ont pas d'access_control
-            http_basic: ~ # HTTP basic authentication (the old-school prompt) qui demande username et password
+#            http_basic: ~ # HTTP basic authentication (the old-school prompt) qui demande username et password
             provider: our_db_provider # base de données des users
+
+            form_login:
+                login_path: login
+                check_path: login
+                csrf_token_generator: security.csrf.token_manager
 
     access_control:
         # require ROLE_ADMIN for /admin*
