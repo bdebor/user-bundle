@@ -1,6 +1,6 @@
 <?php
 
-// http://symfony.com/doc/current/security/form_login_setup.html
+
 
 namespace BD\UserBundle\Controller;
 
@@ -8,13 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class SecurityController extends Controller
-{
+class SecurityController extends Controller {
     /**
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
-    {
+    public function loginAction(Request $request) {
         $authenticationUtils = $this->get('security.authentication_utils');
 
         // get the login error if there is one
@@ -27,5 +25,13 @@ class SecurityController extends Controller
             'last_username' => $lastUsername,
             'error'         => $error,
         ));
+    }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction()
+    {
+        // you'll need to create a route for this URL (but not a controller)
     }
 }
