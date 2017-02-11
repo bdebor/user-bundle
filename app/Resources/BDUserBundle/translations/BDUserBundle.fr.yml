@@ -1,6 +1,6 @@
 registration:
     email:
-        subject: Bienvenue %username% !
+        subject: (overriding test) Bienvenue %username% !
         message: |
             Bonjour %username% !
 
