@@ -57,6 +57,34 @@ class SecurityController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
+
+            /*mail*/
+            $parameters = [
+                "username" => $user->getUsername(),
+                "urlUser"  => 'http://localhost/user-bundle/web/app_dev.php/confirmation/'. $token . '/' . $user->getEmail() // token ???
+            ];
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Confirmation')
+                ->setFrom('oo@oo.oo')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        '@BDUser/emails/registration-email.html.twig',
+                        $parameters
+                    ),
+                    'text/html'
+                )
+                ->addPart(
+                    $this->renderView(
+                        '@BDUser/emails/registration-email.txt.twig',
+                        $parameters
+                    ),
+                    'text/plain'
+                )
+            ;
+            $this->get('mailer')->send($message);
+            /*/mail*/
         }
 
         return $this->render('@BDUser/security/signin.html.twig', [
