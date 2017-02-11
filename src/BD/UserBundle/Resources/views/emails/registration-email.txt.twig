@@ -1,6 +1,1 @@
-Bonjour %username% !
-
-Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
-
-Cordialement,
-L'équipe.
+{{ 'registration.email.message'|trans({'%username%': username, '%confirmationUrl%': confirmationUrl}, 'BDUserBundle') }}

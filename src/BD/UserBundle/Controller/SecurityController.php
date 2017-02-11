@@ -61,11 +61,11 @@ class SecurityController extends Controller {
             /*mail*/
             $parameters = [
                 "username" => $user->getUsername(),
-                "urlUser"  => 'http://localhost/user-bundle/web/app_dev.php/confirmation/'. $token . '/' . $user->getEmail() // token ???
+                "confirmationUrl"  => 'http://localhost/user-bundle/web/app_dev.php/confirmation/'. $token . '/' . $user->getEmail() // token ???
             ];
 
             $message = \Swift_Message::newInstance()
-                ->setSubject('Confirmation')
+                ->setSubject($this->get('translator')->trans('registration.email.subject', ["%username%" => $user->getUsername()], 'BDUserBundle'))
                 ->setFrom('oo@oo.oo')
                 ->setTo($user->getEmail())
                 ->setBody(

@@ -1,0 +1,15 @@
+registration:
+    email:
+        subject: Bienvenue %username% !
+        message: |
+            Bonjour %username% !
+
+            Pour valider votre compte utilisateur, merci de vous rendre sur
+
+            Cordialement,
+            L'équipe.
+        message_html: |
+            <h1>Bonjour  !</h1>
+            <p>Pour valider votre compte utilisateur, merci de cliquer sur <a href="%confirmationUrl%">ce lien</a></p>
+            <p>Cordialement,</p>
+            <p>L'équipe.</p>

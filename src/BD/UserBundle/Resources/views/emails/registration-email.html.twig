@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>Bonjour {{ username }} !</h1>
-    <p>Pour valider votre compte utilisateur, merci de cliquer sur <a href="{{ urlUser }}">ce lien</a></p>
-    <p>Cordialement,</p>
-    <p>L'équipe.</p>
+    {{ 'registration.email.message_html'|trans({'%username%': username, '%confirmationUrl%': confirmationUrl}, 'BDUserBundle')|raw }}
 </body>
 </html>
